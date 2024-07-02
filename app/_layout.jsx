@@ -33,11 +33,11 @@ const RootLayout = () => {
 
   return (
     <>
-      <Text>Header</Text>
+      {/* <Text>Header</Text> */}
       <Stack>
         <Stack.Screen name="index" options={{ headerShown: false }} />
       </Stack>
-      <Text>Footer</Text>
+      {/* <Text>Footer</Text> */}
     </>
   );
 };

@@ -7,7 +7,7 @@ export default function App() {
   return (
     // <View style={styles.container}>
     <View className="flex-1 items-center justify-center bg-blue">
-      <Text className="text-3xl font-black">KarmaShare by Bibek</Text>
+      <Text className="text-3xl font-black">KarmaShare</Text>
       <StatusBar style="auto" />
       <Link href="/home" style={{ color: "blue" }}>
         Go To Home
