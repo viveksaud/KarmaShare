@@ -9,8 +9,8 @@ export default function App() {
     <View className="flex-1 items-center justify-center bg-blue">
       <Text className="text-3xl font-black">KarmaShare by Bibek</Text>
       <StatusBar style="auto" />
-      <Link href="/profile" style={{ color: "blue" }}>
-        Go To Profile
+      <Link href="/home" style={{ color: "blue" }}>
+        Go To Home
       </Link>
     </View>
   );
