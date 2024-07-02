@@ -7,7 +7,7 @@ export default function App() {
   return (
     // <View style={styles.container}>
     <View className="flex-1 items-center justify-center bg-blue">
-      <Text className="text-3xl">Bibek react-native app-1 !</Text>
+      <Text className="text-3xl font-black">KarmaShare by Bibek</Text>
       <StatusBar style="auto" />
       <Link href="/profile" style={{ color: "blue" }}>
         Go To Profile
