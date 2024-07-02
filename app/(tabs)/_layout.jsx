@@ -15,6 +15,7 @@ const TabIcon = ({ icon, name, color, focused }) => {
 
       <Text
         className={`${focused ? "font-semibold" : "font-pregular"}   text-xs`}
+        style={{color:{color}}}
       >
         {name}
       </Text>
@@ -25,10 +26,17 @@ const TabIcon = ({ icon, name, color, focused }) => {
 const TabsLayout = () => {
   return (
     <Tabs
-    screenOptions={{
-      headerShown: false,
-      tabBarShowLabel: false,
-    }}
+      screenOptions={{
+        tabBarShowLabel: false,
+        tabBarActiveTintColor: "#FFA001",
+        tabBarInactiveTintColor: "#CDCDE0",
+        tabBarStyle: {
+            backgroundColor: "#161622",
+            borderTopWidth: 1,
+            borderTopColor: "#232533",
+            height: 84,
+        },
+      }}
     >
       <Tabs.Screen
         name="home"
