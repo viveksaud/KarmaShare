@@ -20,7 +20,7 @@ export default function App() {
           <Image
             source={images.logo}
             resizeMode="contain"
-            className="w-[130px] h-[84px] justify-center item-center"
+            className="w-52 h-20 justify-center item-center"
           />
           <Image
             source={images.cards}
