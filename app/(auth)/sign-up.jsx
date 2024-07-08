@@ -1,4 +1,4 @@
-import { ScrollView, Text, View, Image } from "react-native";
+import { ScrollView, Text, View, Image, Alert } from "react-native";
 import { Link, router } from "expo-router";
 import React, { useState } from "react";
 import { SafeAreaView } from "react-native-safe-area-context";
@@ -17,9 +17,25 @@ const signUp = () => {
 
   const [isSubmitting, setSubmitting] = useState(false);
 
-  const submit = () => {
-    createUser();
-    router.push("/sign-in");
+  const submit = async () => {
+    if(!form.username || !form.email || !form.password){
+      // alert("Please fill all the fields");
+      Alert.alert('Error', 'Please fill all the fields');
+    }
+    setSubmitting(true);
+    try {
+      const result = await createUser(form.email,form.password, form.username);
+
+      //later set it to global state...using context
+
+      // router.push("/sign-in");
+      router.replace('/home');
+    } catch (error) {
+      Alert.alert('Error', error.message);
+    }finally{
+      setSubmitting(false);
+    }
+    
   };
 
   return (
