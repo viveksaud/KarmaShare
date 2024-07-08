@@ -3,38 +3,45 @@ import { Link, router } from "expo-router";
 import React, { useState } from "react";
 import { SafeAreaView } from "react-native-safe-area-context";
 
-
-import { images} from "../../constants";
-import FormField from '../../components/FormField';
+import { images } from "../../constants";
+import FormField from "../../components/FormField";
 import CustomButton from "../../components/CustomButton";
 
-import { signIn } from "../../lib/appwrite";
+import { getCurrentUser, signIn } from "../../lib/appwrite";
+import { useGlobalContext } from "../../context/GlobalContext";
 
 const sign_in = () => {
+  const { setUser, setIsLoggedIn } = useGlobalContext();
+
   const [form, setForm] = useState({
-    email: '',
-    password: ''
-  })
+    email: "",
+    password: "",
+  });
 
   const [isSubmitting, setSubmitting] = useState(false);
 
-const submit = async () => {
-  if(!form.email || !form.password){
+  const submit = async () => {
+    if (form.email === "" || form.password === "") {
       // alert("Please fill all the fields");
-      Alert.alert('Error', 'Please fill all the fields');
+      Alert.alert("Error", "Please fill all the fields");
     }
     setSubmitting(true);
     try {
-      await signIn(form.email,form.password);
+      await signIn(form.email, form.password);
 
       //later set it to global state...using context
-      router.replace('/home');
+      const result = await getCurrentUser();
+      setUser(result);
+      setIsLoggedIn(true);
+      Alert.alert("Success", "User signed in successfully");
+
+      router.replace("/home");
     } catch (error) {
-      Alert.alert('Error', error.message);
-    }finally{
+      Alert.alert("Error", error.message);
+    } finally {
       setSubmitting(false);
     }
-}
+  };
 
   return (
     <SafeAreaView className="bg-primary h-full">
@@ -43,7 +50,7 @@ const submit = async () => {
           <Image
             source={images.logo}
             resizeMode="contain"
-            className='w-56 h-8'
+            className="w-56 h-8"
             // className="w-[115px] h-[34px]"
           />
 

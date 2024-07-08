@@ -4,6 +4,8 @@ import { SplashScreen, Stack } from "expo-router";
 import { useFonts } from "expo-font";
 import { useEffect } from "react";
 
+import GlobalProvider from '../context/GlobalContext'
+
 SplashScreen.preventAutoHideAsync();
 
 const RootLayout = () => {
@@ -33,13 +35,13 @@ const RootLayout = () => {
 
   return (
     <>
-      {/* <Text>Header</Text> */}
-      <Stack>
-        <Stack.Screen name="index" options={{ headerShown: false }} />
-        <Stack.Screen name="(auth)" options={{ headerShown: false }} />
-        {/* <Stack.Screen name="(tab)" options={{ headerShown: false }} /> */}
-      </Stack>
-      {/* <Text>Footer</Text> */}
+      <GlobalProvider>
+        <Stack>
+          <Stack.Screen name="index" options={{ headerShown: false }} />
+          <Stack.Screen name="(auth)" options={{ headerShown: false }} />
+          <Stack.Screen name="(tab)" options={{ headerShown: false }} />
+        </Stack>
+      </GlobalProvider>
     </>
   );
 };
