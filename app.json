@@ -1,7 +1,7 @@
 {
   "expo": {
     "name": "Bibek-react-native-app-1",
-    "scheme": "aora",
+    "scheme": "app",
     "slug": "react_native_crashCourse",
     "version": "1.0.0",
     "orientation": "portrait",
