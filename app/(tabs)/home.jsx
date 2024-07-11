@@ -1,28 +1,52 @@
-import { FlatList, Image, RefreshControl, StatusBar, Text, View } from "react-native";
-import React, { useState } from "react";
+import {
+  Alert,
+  FlatList,
+  Image,
+  RefreshControl,
+  StatusBar,
+  Text,
+  View,
+} from "react-native";
+import React, { useEffect, useState } from "react";
 import { SafeAreaView } from "react-native-safe-area-context";
 
 import images from "../../constants/images";
 import SearchInput from "../../components/SearchInput";
 import Trending from "../../components/Trending";
 import EmptyState from "../../components/EmptyState";
+import { getAllPosts } from "../../lib/appwrite";
+import useAppwrite from "../../lib/useAppwrite";
+import VideoCard from "../../components/VideoCard";
 
 const Home = () => {
+  const { data: posts, refetch } = useAppwrite(getAllPosts);
+  // const { data: latestPosts } = useAppwrite(getLatestPosts);
+
   const [refreshing, setRefreshing] = useState(false);
 
-   const onRefresh = async () => {
-     setRefreshing(true);
-     //we again call videos if any new videos appeared
-     setRefreshing(false);
-   };
+  console.log(posts);
+
+  const onRefresh = async () => {
+    setRefreshing(true);
+    //we again call videos if any new videos appeared
+    await refetch();
+    setRefreshing(false);
+  };
   return (
     <SafeAreaView className="bg-primary h-full">
       <FlatList
         // className="bg-red-800"
         // data={[{ id: 1 }, { id: 2 }, { id: 3 }]}
+        data={posts}
         keyExtractor={(item) => item.$id}
         renderItem={({ item }) => (
-          <Text className="text-white text-3xl">{item.id}</Text>
+          <VideoCard
+            title={item.title}
+            thumbnail={item.thumbnail}
+            video={item.video}
+            creator={item.creator.username}
+            avatar={item.creator.avatar}
+          /> 
         )}
         ListHeaderComponent={() => (
           <View className="flex my-6 px-4 space-y-6">
@@ -60,7 +84,9 @@ const Home = () => {
             subtitle="No videos created yet"
           />
         )}
-        refreshControl={<RefreshControl refreshing={refreshing} onRefresh={onRefresh}/>}
+        refreshControl={
+          <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
+        }
       />
       <StatusBar backgroundColor="#161622" style="light" />
     </SafeAreaView>
