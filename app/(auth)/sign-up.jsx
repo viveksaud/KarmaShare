@@ -28,11 +28,11 @@ const signUp = () => {
     setSubmitting(true);
     try {
       const result = await createUser(form.email, form.password, form.username);
-      //later set it to global state...using context
+     
       setUser(result);
       setIsLoggedIn(true);
 
-      // router.push("/sign-in");
+     
       router.replace("/home");
     } catch (error) {
       Alert.alert("Error", error.message);

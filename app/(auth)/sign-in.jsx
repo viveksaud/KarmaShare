@@ -29,7 +29,6 @@ const sign_in = () => {
     try {
       await signIn(form.email, form.password);
 
-      //later set it to global state...using context
       const result = await getCurrentUser();
       setUser(result);
       setIsLoggedIn(true);
