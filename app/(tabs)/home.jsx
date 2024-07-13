@@ -68,6 +68,7 @@ const Home = () => {
                 />
               </View>
             </View>
+            
             <SearchInput />
 
             <View className="w-full flex-1 pt-5 pb-8">
